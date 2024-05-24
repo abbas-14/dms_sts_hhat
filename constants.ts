@@ -1,0 +1,71 @@
+import path from "path";
+import { parseUnits } from "ethers/lib/utils";
+
+const ADDRESS = {
+    ZERO: `0x${'0'.repeat(40)}`,
+    DAI: '0x7f84437D0bD9a9e0D8957FB394BBfa73893FD957',
+    
+    WETH: '0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E',
+    
+    USDT: '0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB',
+    SAITAMA: '0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690',
+    
+    UNI_ROUTER: '0xa82fF9aFd8f496c3d6ac40E2a0F282E47488CFc9',
+    UNI_FACTORY: '0x9E545E3C0baAB3E08CdfD552C960A1050f373042',
+    
+    SUSHI_ROUTER: '0x851356ae760d987E095750cCeb3bC6014560891C',
+    SUSHI_FACTORY: '0x1613beB3B2C4f22Ee086B2b38C1476A3cE7f78E8',
+    
+    FLASH_BOT: '0xf5059a5D33d5853360D16C683c16e67980206f36',
+
+    UNI_PAIR: '0x19941231fadb042D952C9F623E96A37fAfBf6DF2',
+    SUSHI_PAIR: '0xafF95b22b5878fDBD8e4D480473D20b192C724F5',
+}
+
+const VAL = {
+    TKN0_SYM: 'SAITAMA',
+    TKN1_SYM: 'USDT',
+    PRICE_TOKEN0: 0.002,
+    PRICE_TOKEN1: 0.003,
+    TKN0_NAME: 'saitama',
+    TKN1_NAME: 'usdt',
+    SUCCESS: 'success',
+    FAILURE: 'failure',
+}
+
+// bsc testnet = 97
+// rinkeby = 4
+const CHAIN = {
+    BSC: 97,
+    LOCAL: 0,
+    ETHEREUM: 4,
+}
+
+const ABI = {
+    I_ERC20: './ABI/IERC20.json',
+    PAIR: './ABI/UniswapV2Pair.json',
+    F_BOT: path.join(__dirname, './ABI/FlashBot.json'),
+    I_PAIR: './ABI/IUniswapV2Pair.json',
+    I_FACTORY: './ABI/IUniswapV2Factory.json',
+    I_ROUTER: './ABI/IUniswapV2Router02.json',
+}
+
+const CONFIG = {
+    LOG_LEVEL: 'debug',
+    BASE_TOKENS: [
+        ADDRESS.USDT
+    ],
+    HTTP_PORT: '1441',
+    GAS_LIMIT: 340000, // units
+    MIN_PROFIT_THRESHOLD: 50, // usd
+    GAS_PRICE: parseUnits('3', 'gwei'), // in Gwei
+    PRICE_URL: 'https://min-api.cryptocompare.com/data/price',
+}
+
+export {
+    VAL,
+    ABI,
+    CHAIN,
+    CONFIG,
+    ADDRESS,
+}
