@@ -10,6 +10,12 @@ import "hardhat/console.sol";
 
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
+/*
+    1. add functionality to update asset shares of nominees (maybe after nominee removal)
+    
+
+*/
+
 contract DMSAccount is Common, IERC721Receiver {
     uint256 public constant DUR = 0; // blocks
     

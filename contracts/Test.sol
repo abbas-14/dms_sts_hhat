@@ -14,16 +14,18 @@ import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
 
 interface IDMSAcc {
+    function challenge() external;
+    function claimAssets() external;
+    function disburseAssets() external;
+    function removeNominee(address) external; 
     function sendFT(address, uint256) external;
-    function viewBalanceFT(address) external view returns(uint256);
-    function sendNFT(address, uint256, address) external;
     function withdrawNative(uint256, address) external;
+    function sendNFT(address, uint256, address) external;
+    function totalClaims() external view returns(uint32);
     function withdrawFT(address, uint256, address) external;
     function withdrawNFT(address, uint256, address) external;
-    function challenge() external;
-    function disburseAssets() external;
-    function claimAssets() external;
-    function totalClaims() external view returns(uint32);
+    function viewBalanceFT(address) external view returns(uint256);
+    function addNominees(address[] memory, Common.AssetShare[] memory) external;
 }
 // gas: 6054113
 contract Test is Common, IERC721Receiver {
@@ -46,7 +48,7 @@ contract Test is Common, IERC721Receiver {
         // nominees[0] = address(0);
         uint _len = nominees_.length;
         AssetShare[] memory _assetShares = new AssetShare[](_len);
-        for(uint i=0; i<_len; ++i) _assetShares[i] = AssetShare (50, 50, new address[](0), new uint256[](0));
+        for(uint i=0; i<_len; ++i) _assetShares[i] = AssetShare (30, 30, new address[](0), new uint256[](0));
         //assetShares[0] = AssetShare (10, 20, address(0), 0);
         NomineeDetails memory _nd = NomineeDetails (nominees_, _assetShares);
 
@@ -99,6 +101,19 @@ contract Test is Common, IERC721Receiver {
 
     function test_disburseAssets_by_owner() external {
         IDMSAcc(dms).disburseAssets();
+    }
+
+    // add only 2 more nominees
+    function test_addNominees(address[] memory nominees_) external {
+        uint _len = nominees_.length;
+        require(_len == 2, "nominees must be 2");
+        AssetShare[] memory _assetShares = new AssetShare[](_len);
+        for(uint i=0; i<_len; ++i) _assetShares[i] = AssetShare (20, 20, new address[](0), new uint256[](0));
+        IDMSAcc(dms).addNominees(nominees_, _assetShares);
+    }
+
+    function test_removeNominee(address nominee_) external {
+        IDMSAcc(dms).removeNominee(nominee_);
     }
 
     // helper functions
