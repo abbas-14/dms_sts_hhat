@@ -298,6 +298,10 @@ contract DMSAccount is Common, IERC721Receiver {
         disbursed = disb_;
     }
 
+    function changeOwner(bool newOwner_) external onlyOwner() {
+        owner = newOwner_;
+    }
+
     function viewBalanceFT(address ft_) public view returns(uint256) {
         return IFT(ft_).balanceOf(address(this));
     }
