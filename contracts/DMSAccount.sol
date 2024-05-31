@@ -160,7 +160,7 @@ contract DMSAccount is Common, IERC721Receiver {
         return block.timestamp > startTime + duration;
     }
 
-    function challenge() external withMutex() onlyOwner() {
+    function challenge() external onlyOwner() {
         require(inChallenge(), "No Challenge");
         // if owner is alive and challenge is accepted
         // what will happend
@@ -191,7 +191,7 @@ contract DMSAccount is Common, IERC721Receiver {
         }
     }
 
-    function updateDuration(uint256 _dur) external withMutex() onlyOwner() {
+    function updateDuration(uint256 _dur) external onlyOwner() {
         duration = _dur;
     }
 
@@ -213,7 +213,7 @@ contract DMSAccount is Common, IERC721Receiver {
         } 
     }
 
-    function disburseAssets() external {
+    function disburseAssets() external withMutex() {
         require(!disbursed, "already disbursed!");
         if(msg.sender != owner) {
             require(totalClaims == details.nominees.length, "not all claims acheived");
@@ -294,7 +294,7 @@ contract DMSAccount is Common, IERC721Receiver {
             }
     }
 
-    function setDisbursed(bool disb_) external {
+    function setDisbursed(bool disb_) external onlyOwner() {
         disbursed = disb_;
     }
 
