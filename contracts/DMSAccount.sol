@@ -298,7 +298,7 @@ contract DMSAccount is Common, IERC721Receiver {
         disbursed = disb_;
     }
 
-    function changeOwner(bool newOwner_) external onlyOwner() {
+    function changeOwner(address newOwner_) external onlyOwner() {
         owner = newOwner_;
     }
 

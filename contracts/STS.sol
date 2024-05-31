@@ -77,10 +77,10 @@ contract STS {
         thresholdAmount = thAmt_;
     }
 
-    function changeOwner(bool newOwner_) external onlyOwner() {
+    function changeOwner(address newOwner_) external onlyOwner() {
         owner = newOwner_;
     }
-    
+
     function isOtpExpired(uint256 startTime_) public view returns(bool) {
         return block.timestamp > startTime_ + otpExpiry;
     }
