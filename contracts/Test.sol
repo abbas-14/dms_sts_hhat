@@ -43,11 +43,15 @@ contract Test is Common, IERC721Receiver {
         console.log("constructor");
     }
 
+    // after registration, call test_addNominees
     function test_registration(address[] memory nominees_) external  {
         // address[] memory nominees = new address[](1);
         // nominees[0] = address(0);
         uint _len = nominees_.length;
+        require(_len == 2, "nominees must be 2");
         AssetShare[] memory _assetShares = new AssetShare[](_len);
+        // native share: 30%
+        // ft share: 30%
         for(uint i=0; i<_len; ++i) _assetShares[i] = AssetShare (30, 30, new address[](0), new uint256[](0));
         //assetShares[0] = AssetShare (10, 20, address(0), 0);
         NomineeDetails memory _nd = NomineeDetails (nominees_, _assetShares);
@@ -108,10 +112,12 @@ contract Test is Common, IERC721Receiver {
         uint _len = nominees_.length;
         require(_len == 2, "nominees must be 2");
         AssetShare[] memory _assetShares = new AssetShare[](_len);
+        // native share: 20%
+        // ft share: 20%
         for(uint i=0; i<_len; ++i) _assetShares[i] = AssetShare (20, 20, new address[](0), new uint256[](0));
         IDMSAcc(dms).addNominees(nominees_, _assetShares);
     }
-
+    
     function test_removeNominee(address nominee_) external {
         IDMSAcc(dms).removeNominee(nominee_);
     }
