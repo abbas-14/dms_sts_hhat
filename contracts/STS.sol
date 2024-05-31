@@ -86,18 +86,18 @@ contract STS {
     }
 
     function num2str(uint num_) public pure returns(string memory) {
-        uint tmp = num_;
-        uint digits;
-        while (tmp != 0) {
-            digits++;
-            tmp /= 10;
+        uint _tmp = num_;
+        uint _digits;
+        while (_tmp > 0) {
+            _digits++;
+            _tmp /= 10;
         }
-        bytes memory buffer = new bytes(digits);
+        bytes memory _buffer = new bytes(_digits);
         while (num_ > 0) {
-            buffer[--digits] = bytes1(uint8(48 + uint(num_ % 10)));
+            _buffer[--_digits] = bytes1(uint8(48 + uint(num_ % 10)));
             num_ /= 10;
         }
-        return string(buffer);
+        return string(_buffer);
     }
 
     function sha256HashOf(string memory v_) public pure returns(bytes32){
