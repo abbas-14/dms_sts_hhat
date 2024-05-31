@@ -4,6 +4,7 @@
 pragma solidity ^0.8.24;
 
 interface IFT {
+    function mint(address, uint256) external;
     function totalSupply() external view returns (uint256);
     function balanceOf(address account) external view returns (uint256);
     function approve(address spender, uint256 amount) external returns (bool);

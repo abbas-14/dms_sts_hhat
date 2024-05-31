@@ -10,8 +10,8 @@ abstract contract Common {
         uint8 nativeShare; // 0 - 100
         // IFT fToken;
         uint8 ftShare; // 0 - 100
-        address nfToken;
-        uint256 nftid; // id
+        address[] nfToken;
+        uint256[] nftid; // id
     }
      struct NomineeDetails {
         address[] nominees;

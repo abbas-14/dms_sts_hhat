@@ -4,6 +4,7 @@
 pragma solidity ^0.8.24;
 
 interface INFT {
+    function safeMint(address) external;
     function approve(address to, uint256 tokenId) external;
     function setApprovalForAll(address operator, bool approved) external;
     function ownerOf(uint256 tokenId) external view returns (address owner);
